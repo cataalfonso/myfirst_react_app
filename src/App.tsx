@@ -24,6 +24,8 @@ const App = () => {
   const[score, setScore]=useState(0);
   const[gameOver, setGameOver]= useState(true);
 
+  console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY))
+
   const startTrivia = async () => {
     setLoading(true);
     setGameOver(false);
@@ -59,19 +61,21 @@ const App = () => {
       ) : null}
       {!gameOver ? <p className="Score">Score:</p> : null}
       {loading && <p>Loading Questions...</p>}
-      {!loading && !gameOver && (
-        <QuestionCard 
+    {!loading && !gameOver && (
+       <QuestionCard 
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
         answers={questions[number].answers}
         userAnswer={userAnswers ? userAnswers[number] : undefined}
         callback={checkAnswer}
-      />
-      ) }
+      /> 
+   ) } 
+      {!gameOver && !loading && userAnswers.length=== number+1 && number !== TOTAL_QUESTIONS-1 ? (
       <button  className="next" onClick={nextQuestion}>
         Next Question
       </button>
+      ): null}
     </div>
   );
 }
