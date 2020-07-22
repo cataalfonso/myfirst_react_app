@@ -35,19 +35,20 @@ export const Wrapper = styled.div`
     }
 
     h1[
-        font-family: Fascinate Inline;
+        font-family: Fascinate Inline, Haettenshweiler, 'Arial Narrow Bold';
         background-image: linear-gradient(180deg, #666, #87f1ff);
         background-size: 100%;
         background-clip: text;
-        --webkit-background-clip: text;
-        --webkit-text-fill-color: transparent;
-        --moz-background-clip: text;
-        --moz-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
         filter: drop-shadow(2px 2px #0085a3);
         font-size: 70px;
+        font-weight: 400px;
         text-align: center;
         margin: 20px;
-        
+
 
     ]
 
