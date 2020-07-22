@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {fetchQuizQuestions} from './API';
 //Components
 import QuestionCard from './components/QuestionCard';
-
 //Types
 import {QuestionState, Difficulty} from './API';
+//Styles
+import {GlobalStyle, Wrapper} from './App.styles';
 
-type AnswerObject={
+export type AnswerObject={
   question:string;
   answer: string;
   correct: boolean;
@@ -44,22 +45,48 @@ const App = () => {
   }
 
     const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (!gameOver){
+        //user answer
+        const answer =e .currentTarget.value;
+        //check answer against the correct answer
+        const correct=questions[number].correct_answer === answer;
+        // add score if answer is correct
+        if (correct) setScore(prev=> prev + 1);
+        // save the answer in the array for user answers
+        const answerObject={
+          question:questions[number].question,
+          answer,
+          correct,
+          correctAnswer: questions[number].correct_answer,
+        };
+        setUserAnswers(prev =>[...prev, answerObject]);
 
+      }
     }
 
     const nextQuestion = ()=>{
+      // move on to the next question if not the last question
+      const nextQuestion = number +1;
+      if (nextQuestion === TOTAL_QUESTIONS){
+        setGameOver(true);
+      } else {
+        setNumber (nextQuestion);
+      }
+
 
     }
 
   return (
-    <div className="App">
+    <>
+    <GlobalStyle/>
+    <Wrapper>
       <h1>REACT QUIZ</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
       <button className="start" onClick={startTrivia}>
         Start
       </button>
       ) : null}
-      {!gameOver ? <p className="Score">Score:</p> : null}
+      {!gameOver ? <p className="Score">Score:{score}</p> : null}
       {loading && <p>Loading Questions...</p>}
     {!loading && !gameOver && (
        <QuestionCard 
@@ -76,7 +103,8 @@ const App = () => {
         Next Question
       </button>
       ): null}
-    </div>
+    </Wrapper>
+    </>
   );
 }
 
