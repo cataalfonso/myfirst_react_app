@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
         margin:0;
     }
 
-    h1[
+    h1{
         font-family: Fascinate Inline, Haettenshweiler, 'Arial Narrow Bold';
         background-image: linear-gradient(180deg, #666, #87f1ff);
         background-size: 100%;
@@ -48,8 +48,21 @@ export const Wrapper = styled.div`
         font-weight: 400px;
         text-align: center;
         margin: 20px;
+    }
 
+.start, .next {
+    cursor: pointer;
+    background: linear-gradient(180deg, #fff, #ffcc91);
+    border: 2px solid #d38558;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    heightt: 40px;
+    margin: 20px 0;
+    padding: 0 40px;
+}
 
-    ]
+.start{
+    max-width: 200px;
+}
 
 `
